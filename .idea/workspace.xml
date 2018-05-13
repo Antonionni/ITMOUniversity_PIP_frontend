@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68543ef5-1cd5-4072-bc08-9ae5d78f9c23" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/common/js/components/header.react.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/common/js/components/header.react.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/js/api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/js/components/index.react.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/index/js/components/index.react.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/js/reducers/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/js/stores/store-factory.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/index/less/main.less" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/registry/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/registry/js/components/main-wrapper.react.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/registry/js/components/registry.react.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/registry/js/contants.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/registry/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/gulpfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="68543ef5-1cd5-4072-bc08-9ae5d78f9c23" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -282,12 +265,12 @@
       <option name="presentableId" value="Default" />
       <updated>1526212616127</updated>
       <workItem from="1526212619828" duration="5015000" />
-      <workItem from="1526218021547" duration="14495000" />
+      <workItem from="1526218021547" duration="14750000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19510000" />
+    <option name="totallyTimeSpent" value="19765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1920" height="1050" extended-state="6" />
