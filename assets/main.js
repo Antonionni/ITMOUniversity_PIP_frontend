@@ -1,9 +1,10 @@
-'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Registry from "./components/registry.react"
+
+import Index from './index/js/components/index.react';
+
 
 ReactDOM.render(
-    <Registry />,
+    <Index />,
     document.getElementById('wrapper')
 );

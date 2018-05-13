@@ -15,8 +15,7 @@ export default class Header extends Component {
         return (
             <header className="main-header">
                 <div className="logo-header"></div>
-                <div className="menu-header"></div>
-                <div className="buttons">
+                <div className="buttons-header">
                     <Button label="Вход" onClick={this.handleEntryClick} />
                     <Button label="Регистрация" onClick={this.handleRegistryClick} />
                 </div>
