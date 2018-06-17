@@ -1,0 +1,42 @@
+@import "common";
+
+.index-wrapper {
+  height: calc(100% - 60px);
+  width: 100%;
+}
+
+.fast-register {
+  width: 100%;
+  background-image: url("img/background.jpg");
+  background-size: cover;
+  height: 60%;
+  .fast-register-wrapper {
+    background-color: rgba(0,0,0,0.4);
+    z-index: 50;
+    height: 100%;
+    width: 100%;
+  }
+  .register-form {
+    width: 20%;
+    z-index: 100;
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    input {
+      height: 40px;
+      width: 100%;
+    }
+    > div {
+      padding-bottom: 10px;
+    }
+    > h2 {
+      text-align: center;
+      color: white;
+      padding-bottom: 10%;
+    }
+    button {
+      height: 40px;
+      width: 100%;
+    }
+  }
+}

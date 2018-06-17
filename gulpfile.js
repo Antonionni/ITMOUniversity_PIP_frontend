@@ -15,7 +15,7 @@ const rename = require('gulp-rename');
 const argv = require('yargs').argv;
 
 gulp.task('styles', function () {
-    return gulp.src('./assets/**/css/main.scss')
+    return gulp.src('./assets/css/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(cleanCSS({debug: true}, (details) => {
             console.log("before: " + details.name + ': ' + details.stats.originalSize);
@@ -27,7 +27,7 @@ gulp.task('styles', function () {
 
 
 gulp.task('browserify', () => {
-        return browserify({ entries: `./assets/main.js`, debug: true })
+        return browserify({ entries: `./assets/js/main.js`, debug: true })
             .transform(babelify, { presets: ["react", "es2015"] }).bundle()
             .pipe(source('main.js'))
             .pipe(buffer())
@@ -42,16 +42,16 @@ gulp.task('copyHTML', () => {
 });
 
 gulp.task('copyImage', () => {
-    return gulp.src('./assets/**/img/*')
+    return gulp.src('./assets/img/*')
         .pipe(gulp.dest('./target/img'))
 });
 
 gulp.task('watch', ['styles', 'browserify', 'copyHTML', 'copyImage'], () => {
     gutil.log(`watch task!`);
-    gulp.watch('./assets/**/css/*.scss', ['styles']);
-    gulp.watch('./assets/**/js/**/*.js', ['browserify'])
-    gulp.watch('./assets/**/index.html', ['copyHTML']);
-    gulp.watch('./assets/**/img/*', ['copyImage']);
+    gulp.watch('./assets/css/*.scss', ['styles']);
+    gulp.watch('./assets/js/**/*.js', ['browserify'])
+    gulp.watch('./assets/index.html', ['copyHTML']);
+    gulp.watch('./assets/img/*', ['copyImage']);
 });
  gulp.task('just-build', ['styles', 'browserify', 'copyHTML', 'copyImage'], () => {
      gutil.log(`just build task!`);
