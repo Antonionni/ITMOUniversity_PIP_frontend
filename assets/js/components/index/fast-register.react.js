@@ -3,8 +3,6 @@ import { Password } from 'primereact/components/password/Password';
 import { InputText } from 'primereact/components/inputtext/InputText';
 import { Button } from 'primereact/components/button/Button';
 
-import { PASSWORD_MESSAGES } from "../../constants";
-
 
 export default class FastRegister extends React.Component {
     constructor(props) {
@@ -29,7 +27,7 @@ export default class FastRegister extends React.Component {
         return (
             <div className="fast-register">
                 <div className="fast-register-wrapper">
-                    <div className="register-form">
+                    <div className="fast-register-form form">
                         <h2>Быстрая регистрация</h2>
                         <div>
                             <InputText name="email" placeholder="Email" onChange={this.handleChangeInput} />
@@ -52,6 +50,7 @@ export default class FastRegister extends React.Component {
                         </div>
                         <div>
                             <Button label="Зарегистрироваться" onClick={this.handleRegisterClick} />
+                            <a href="/authenticate/google" className="google-auth"/>
                         </div>
                     </div>
                 </div>

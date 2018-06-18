@@ -1,7 +1,8 @@
 export const URLS = {
-    signUp: "",
-    signIn: "",
-    logout: ""
+    signUp: "/signup",
+    signIn: "/login",
+    logout: "/logout",
+    getAccount: "/profile/new"
 };
 
 export const PASSWORD_MESSAGES = {
@@ -10,3 +11,5 @@ export const PASSWORD_MESSAGES = {
     MEDIUM_LABEL: "Средний",
     STRONG_LABEL: "Сложный"
 };
+
+export const SESSION_NAME = "PLAY_SESSION=";
