@@ -1,4 +1,3 @@
-import { $ } from 'jquery';
 import _ from 'underscore';
 
 import { URLS, SESSION_NAME } from "./constants";
@@ -7,7 +6,7 @@ export const signIn = (data) => {
     return $.ajax({
         url: URLS.signIn,
         method: "POST",
-        body: JSON.stringify(data)
+        data: data
     });
 };
 

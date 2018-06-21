@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const cleanCSS = require('gulp-clean-css');
 const gutil = require('gulp-util');
+const plumber = require('gulp-plumber');
 
 const browserify = require('browserify');
 const babelify = require('babelify');
@@ -13,6 +14,7 @@ const concatCss = require('gulp-concat-css');
 const rename = require('gulp-rename');
 
 const argv = require('yargs').argv;
+
 
 gulp.task('styles', function () {
     return gulp.src('./assets/css/main.scss')
@@ -28,7 +30,13 @@ gulp.task('styles', function () {
 
 gulp.task('browserify', () => {
         return browserify({ entries: `./assets/js/main.js`, debug: true })
-            .transform(babelify, { presets: ["react", "es2015"] }).bundle()
+            .transform(babelify, { presets: ["react", "es2015"] })
+            .bundle()
+            .on('error', function(err){
+                gutil.log(gutil.colors.red.bold('[browserify error]'));
+                gutil.log(err.toString());
+                this.emit('end');
+            })
             .pipe(source('main.js'))
             .pipe(buffer())
             // .pipe(uglify())
@@ -49,7 +57,7 @@ gulp.task('copyImage', () => {
 gulp.task('watch', ['styles', 'browserify', 'copyHTML', 'copyImage'], () => {
     gutil.log(`watch task!`);
     gulp.watch('./assets/css/*.scss', ['styles']);
-    gulp.watch('./assets/js/**/*.js', ['browserify'])
+    gulp.watch('./assets/js/**/*.js', ['browserify']);
     gulp.watch('./assets/index.html', ['copyHTML']);
     gulp.watch('./assets/img/*', ['copyImage']);
 });

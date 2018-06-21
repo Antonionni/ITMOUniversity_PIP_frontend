@@ -5,23 +5,16 @@ import { Password } from 'primereact/components/password/Password';
 import { InputText } from 'primereact/components/inputtext/InputText';
 import { Button } from 'primereact/components/button/Button';
 
+import { signIn } from '../../duck/user';
+
 export default class SignIn extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            email: "",
-            password: ""
-        };
-
-        this.handleChangeInput = (e) => {
-            this.setState({
-                [e.target.name]: e.target.value
-            });
-        };
-
-        this.handleSignInClick = () => {
-            const { email, password }  = this.props;
-            console.log("email = ", email, " password = ", password);
+        this.handleSubmit = (e) => {
+            e.preventDefault();
+            const { dispatch } = this.props;
+            const data = $(this.loginForm).serializeArray();
+            dispatch(signIn(data))
         };
     }
 
@@ -30,19 +23,19 @@ export default class SignIn extends React.Component {
             <React.Fragment>
                 <Header signIn />
                 <div className="main-content">
-                    <div className="sig-in form">
+                    <form ref={node => this.loginForm = node } className="sig-in form" action="/login" method="post" onSubmit={this.handleSubmit.bind(this)}>
                         <h2>Авторизация</h2>
                         <div>
-                            <InputText name="email" placeholder="Email" onChange={this.handleChangeInput} />
+                            <InputText id="email" name="email" placeholder="Email" />
                         </div>
                         <div>
-                            <Password name="password1" placeholder="Пароль" feedback={false} onChange={this.handleChangeInput} />
+                            <Password id="password" name="password" placeholder="Пароль" feedback={false} />
                         </div>
                         <div>
-                            <Button label="Войти" onClick={this.handleSignInClick} />
+                            <Button label="Войти" />
                             <a href="/authenticate/google" className="google-auth"/>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </React.Fragment>
         )

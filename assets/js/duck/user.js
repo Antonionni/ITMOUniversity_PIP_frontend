@@ -15,20 +15,16 @@ export const userLogout = createAction(USER_LOGOUT);
 export const checkSession = createAction(CHECK_SESSION);
 
 const initialState = {
-    error: null,
     currentUser: null,
     isAuth: false
 };
 
-export const signIn = (user , password) => {
+export const signIn = (data) => {
     return (dispatch) => {
-        api.signIn(user, password).done((data) => {
-            dispatch(userSignIn(data));
+        api.signIn(data).done((data, textStatus, response) => {
+            dispatch(userSignIn(true));
         }).fail((error) => {
-            dispatch(userSignIn({
-                error,
-                currentUser: null
-            }));
+            dispatch(userSignIn(false));
         });
     };
 };
@@ -60,8 +56,7 @@ export const isSessionExist = () => {
 export default handleActions({
     [USER_SIGN_IN]: (state, { payload }) => {
         return _.assign(state, {
-            error: payload.error,
-            currentUser: payload.user
+            isAuth: payload
         });
     },
     [USER_SIGN_UP]: (state, { payload }) => {
@@ -79,7 +74,7 @@ export default handleActions({
             isAuth: payload
         });
     }
-});
+}, initialState);
 
 // selectors
 
