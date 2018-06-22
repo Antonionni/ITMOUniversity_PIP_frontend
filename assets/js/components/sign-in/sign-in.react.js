@@ -6,10 +6,18 @@ import { InputText } from 'primereact/components/inputtext/InputText';
 import { Button } from 'primereact/components/button/Button';
 
 import { signIn } from '../../duck/user';
+import { connect } from "react-redux";
 
-export default class SignIn extends React.Component {
+import { Redirect, withRouter } from 'react-router-dom';
+
+// import PNotify from "pnotify/dist/es/PNotify";
+
+class SignIn extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            redirectToDashboard: false
+        };
         this.handleSubmit = (e) => {
             e.preventDefault();
             const { dispatch } = this.props;
@@ -17,8 +25,18 @@ export default class SignIn extends React.Component {
             dispatch(signIn(data))
         };
     }
-
-    render() {
+    componentWillReceiveProps(newProp) {
+        debugger;
+        const { isAuth } = newProp.user;
+        debugger;
+         if (isAuth !== this.props.isAuth && !isAuth) {
+             // PNotify.alert('Неверный логин или пароль!');
+             console.log('Неверный логин или пароль!');
+         } else {
+             window.location.hash = "/dashboard";
+         }
+    }
+    renderContent() {
         return (
             <React.Fragment>
                 <Header signIn />
@@ -40,4 +58,19 @@ export default class SignIn extends React.Component {
             </React.Fragment>
         )
     }
+    renderRedirect() {
+        return <Redirect to="/dashboard" />;
+    }
+
+    render() {
+        return this.renderContent();
+    }
 }
+
+function mapStateToProps (state, ownProps)  {
+    return {
+        user: state.user
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(SignIn));

@@ -12,6 +12,9 @@ import jQuery from 'jquery';
 window.$ = jQuery;
 window.jQuery = jQuery;
 
+import _ from "underscore";
+window._ = _;
+
 ReactDOM.render(
     <Provider store={store}>
         <HashRouter>

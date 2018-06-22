@@ -12,4 +12,4 @@ export const PASSWORD_MESSAGES = {
     STRONG_LABEL: "Сложный"
 };
 
-export const SESSION_NAME = "PLAY_SESSION=";
+export const SESSION_NAME = "SESSION=";

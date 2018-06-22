@@ -1,5 +1,6 @@
 @import "common";
 @import "register";
+@import "admin";
 
 .index-wrapper {
   height: calc(100% - 60px);
@@ -24,4 +25,37 @@
       color: white;
     }
   }
+}
+.course-wrapper {
+  height: 40%;
+  margin-top: 30px;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  h2 {
+    text-align: center;
+  }
+  .course-list {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .course {
+
+    img {
+      max-width: 300px;
+      max-height: 125px;
+    }
+    .title {
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+}
+
+.dashboard-wrapper {
+
 }

@@ -1,24 +1,23 @@
 import { handleActions, createAction } from 'redux-actions';
 import * as api from '../api';
 
-const USER_SIGN_IN = "USER_SIGN_IN";
-const USER_SIGN_UP = "USER_SIGN_UP";
-const USER_LOGOUT = "USER_LOGOUT";
-const CHECK_SESSION = "CHECK_SESSION";
-
+const LOADED_ALL_USERS = "LOADED_ALL_USERS";
+const LOADED_TEACHERS = "LOADED_TEACHERS";
+const APPROVED_TEACHER = "APPROVED_TEACHER";
+const SAVED_USER_ROLES = "SAVED_USER_ROLES";
 // actions
 
-export const userSignUp = createAction(USER_SIGN_UP);
-export const userSignIn = createAction(USER_SIGN_IN);
-export const userLogout = createAction(USER_LOGOUT);
-export const checkSession = createAction(CHECK_SESSION);
+export const loadedAllUsers = createAction(LOADED_ALL_USERS);
+export const loadedTeachers = createAction(LOADED_TEACHERS);
+export const approvedTeacher = createAction(APPROVED_TEACHER);
+export const savedUserRoles = createAction(SAVED_USER_ROLES);
 
 const initialState = {
-    currentUser: null,
-    isAuth: null
+    users: [],
+    teachers: []
 };
 
-export const signIn = (data) => {
+export const loasUsers = (data) => {
     return (dispatch) => {
         api.signIn(data).done((data, textStatus, response) => {
             dispatch(userSignIn(true));

@@ -10,8 +10,8 @@ import { signUp } from '../../duck/user';
 import Header from '../common/header.react';
 
 const OPTIONS = [
-    { name: "Студент", value: "Student"},
-    { name: "Преподаватель", value: "Teacher"}
+    { label: "Студент", value: "Student"},
+    { label: "Преподаватель", value: "Teacher"}
 ];
 
 export default class Register extends React.Component {
@@ -20,9 +20,8 @@ export default class Register extends React.Component {
         this.state = {
             firstname: "",
             secondname: "",
-            placeOfStudy: "",
             birthDate : "",
-            roles: [],
+            role: "",
             email: "",
             password1: "",
             password1: ""
@@ -42,14 +41,11 @@ export default class Register extends React.Component {
 
         this.handleChangeUserType = (e) => {
             this.setState({
-                roles: [e.value]
+                role: e.value
             });
         };
 
         this.handleRegisterClick = (data) => {
-            /*const { firstname, secondname, patronymic, email, password1, password2 } = this.state;
-            const { dispatch } = this.props;
-            console.log("firstname = ", firstname, " secondname", secondname, " patronymic = ", patronymic, " email = ", email, " password1 = ", password1, " password2 = ", password2);*/
             debugger;
             dispatch(signUp(data));
         };
@@ -57,6 +53,7 @@ export default class Register extends React.Component {
 
     render() {
         // const { email, password1, password2 } = this.props;
+        const { role } = this.state;
         return (
             <React.Fragment>
                 <Header register />
@@ -73,13 +70,13 @@ export default class Register extends React.Component {
                             <InputText name="secondname" placeholder="Фамилия" onChange={this.handleChangeInput} />
                         </div>
                         <div>
-                            <InputText name="placeOfStudy" placeholder="Место обучения" onChange={this.handleChangeInput} />
+                            <InputText name="placeOfStudy" placeholder="Образование" onChange={this.handleChangeInput} />
                         </div>
                         <div>
                             <Calendar name="birthDate" placeholder="День рождения" onChange={this.handleChangeDate} />
                         </div>
                         <div>
-                            <SelectButton name="roles" options={OPTIONS} onChange={this.handleChangeUserType}></SelectButton>
+                            <SelectButton name="roles" value={role} options={OPTIONS} onChange={this.handleChangeUserType}></SelectButton>
                         </div>
                         <div>
                             <Password name="password1" placeholder="Пароль" feedback={false} onChange={this.handleChangeInput} />
