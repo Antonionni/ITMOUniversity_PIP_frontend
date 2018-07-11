@@ -14,7 +14,7 @@ export const signUp = (data) => {
     return $.ajax({
         url: URLS.signUp,
         method: "POST",
-        body: data
+        body: JSON.stringify(data)
     });
 };
 
@@ -25,7 +25,17 @@ export const logout = () => {
     });
 };
 
-export const isSessionEnable = () => {
-    const cookie = document.cookie;
-    return _.find(cookie.split(";"), item => item === SESSION_NAME);
+export const checkUser = () => {
+    return $.ajax({
+        url: URLS.checkUser
+    });
 };
+
+export const updateUser = (data) => {
+    return $.ajax({
+        url: URLS.update,
+        method: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json"
+    });
+}

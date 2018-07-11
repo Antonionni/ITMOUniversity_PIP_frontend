@@ -5,23 +5,21 @@ import Footer from '../common/footer.react';
 import FastRegister from './fast-register.react';
 import CourseList from './course-list.react';
 
-import { connect } from 'react-redux';
+import {checkUser, getCurrentUser, getError, getIsAuth} from "../../duck/user";
+import { connect } from "react-redux";
 
-import { isSessionEnable } from "../../api";
+import { withRouter } from 'react-router-dom'
 
 class Index extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount() {
-        $.ajax({
-            url: "/profile/new",
-            method: "GET"
-        }).done((data) => {
-            window.location.hash = "/dashboard";
-        })
+        const { dispatch } = this.props;
+        dispatch(checkUser());
     }
     render() {
+        console.log("props = ", this.props)
         return (
             <React.Fragment>
                 <Header />
@@ -36,10 +34,14 @@ class Index extends React.Component {
 }
 
 function mapStateToProps({ user }) {
+    const currentUser = getCurrentUser(user);
+    const error = getError(user);
+    const isAuth = getIsAuth(user);
     return {
-        user
+        currentUser,
+        error,
+        isAuth
     };
 }
 
 export default connect(mapStateToProps)(Index);
-

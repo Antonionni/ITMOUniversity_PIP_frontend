@@ -6,6 +6,9 @@ import { Button } from 'primereact/components/button/Button';
 import { Calendar } from 'primereact/components/calendar/Calendar';
 import CourseList from '../index/course-list.react';
 
+
+import {updateUser, userUpdate} from '../../duck/user';
+
 export default class DashBoard extends React.Component {
     constructor(props) {
         super(props);
@@ -29,22 +32,21 @@ export default class DashBoard extends React.Component {
         };
 
         this.handleSaveClick = () => {
+            const { dispatch } = this.props;
+
             const{ firstname, lastname, placeOfStudy, birthDate, email, user } = this.state;
             user.data.baseUser.firstName = firstname;
             user.data.baseUser.lastName = lastname;
             user.data.baseUser.email = email;
             user.data.baseUser.birthDate = Date.parse(birthDate);
-            debugger;
-            $.ajax({
-                url: "/users/update",
-                method: "POST",
-                data: JSON.stringify(user.data),
-                contentType: "application/json"
-            });
-            debugger;
+            
+            dispatch(userUpdate(user.data));
         }
     }
-    componentDidMount() {
+    componentWillReceiveProps(newProps) {
+        if (this.props.currentUser !== newProps.currentUser) {
+
+        }
         $.ajax({
             url: "/profile/new",
             method: "GET"
@@ -66,31 +68,34 @@ export default class DashBoard extends React.Component {
         return (
             <React.Fragment>
                 <Header user={user ? user.data.baseUser : null} />
-                <div className="dashboard-wrapper">
+                <div className="dashboard-wrapper base-wrapper">
                     <div>
                         <h1>Личный кабинет</h1>
                     </div>
-                    <div>
-                        <label htmlFor="email">Email: </label>
-                        <InputText name="email" defaultValue={email} onChange={this.handleChangeInput} />
-                    </div>
-                    <div>
-                        <label htmlFor="lastname">Фамилия: </label>
-                        <InputText name="lastname" defaultValue={lastname} onChange={this.handleChangeInput}/>
-                    </div>
-                    <div>
-                        <label htmlFor="firstname">Имя: </label>
-                        <InputText name="firstname" defaultValue={firstname} onChange={this.handleChangeInput}/>
-                    </div>
-                    <div>
-                        <label htmlFor="birthdate">Дата рождения: </label>
-                        <Calendar dateFormat="@" name="birthdate" defaultValue={Date.parse(birthDate)} onChange={this.handleChangeDate}/>
-                    </div>
-                    <div className="buttons">
-                        <Button label="Сохранить" onClick={this.handleSaveClick}/>
+                    <div className="settings-form ui-g">
+                        <div className="ui-g-12">
+                            <label htmlFor="email" className="ui-g-6">Email: </label>
+                            <InputText name="email" className="ui-g-6" defaultValue={email} onChange={this.handleChangeInput} />
+                        </div>
+                        <div className="ui-g-12">
+                            <label htmlFor="lastname" className="ui-g-6">Фамилия: </label>
+                            <InputText name="lastname" className="ui-g-6" defaultValue={lastname} onChange={this.handleChangeInput}/>
+                        </div>
+                        <div className="ui-g-12">
+                            <label htmlFor="firstname" className="ui-g-6">Имя: </label>
+                            <InputText name="firstname" className="ui-g-6" defaultValue={firstname} onChange={this.handleChangeInput}/>
+                        </div>
+                        <div className="ui-g-12">
+                            <label htmlFor="birthdate" className="ui-g-6">Дата рождения: </label>
+                            <div className="ui-g-6">
+                                <Calendar dateFormat="@" name="birthdate" defaultValue={Date.parse(birthDate)} onChange={this.handleChangeDate}/>
+                            </div>
+                        </div>
+                        <div className="buttons ui-g-12">
+                            <Button label="Сохранить" onClick={this.handleSaveClick}/>
+                        </div>
                     </div>
                 </div>
-                <CourseList />
             </React.Fragment>
 
         )

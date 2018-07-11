@@ -5,7 +5,7 @@ import {Menu} from 'primereact/components/menu/Menu';
 import { Link } from 'react-router-dom';
 
 const items = [
-    { label: "Найстройки" },
+    { label: "Настройки" },
     { label: "Мои курсы" },
     { label: "Выход" },
 ];

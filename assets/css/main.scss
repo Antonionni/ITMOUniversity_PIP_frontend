@@ -1,6 +1,8 @@
+@import "../../node_modules/font-awesome/scss/font-awesome";
 @import "common";
 @import "register";
 @import "admin";
+@import "dashboard";
 
 .index-wrapper {
   height: calc(100% - 60px);
@@ -53,9 +55,5 @@
       text-align: center;
     }
   }
-
-}
-
-.dashboard-wrapper {
 
 }

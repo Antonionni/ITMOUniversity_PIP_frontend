@@ -24,7 +24,7 @@ export default class Register extends React.Component {
             role: "",
             email: "",
             password1: "",
-            password1: ""
+            password2: ""
         };
 
         this.handleChangeInput = (e) => {
@@ -46,13 +46,13 @@ export default class Register extends React.Component {
         };
 
         this.handleRegisterClick = (data) => {
+            const { firstname, secondname, birthDay, role, email, password1, password2 } = this.state;
             debugger;
-            dispatch(signUp(data));
+            dispatch(signUp(this.state));
         };
     }
 
     render() {
-        // const { email, password1, password2 } = this.props;
         const { role } = this.state;
         return (
             <React.Fragment>

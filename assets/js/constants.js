@@ -2,7 +2,7 @@ export const URLS = {
     signUp: "/signup",
     signIn: "/login",
     logout: "/logout",
-    getAccount: "/profile/new"
+    checkUser: "/profile/new"
 };
 
 export const PASSWORD_MESSAGES = {
