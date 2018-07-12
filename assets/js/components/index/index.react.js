@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 
 import { withRouter } from 'react-router-dom'
 
-class Index extends React.Component {
+export default class Index extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -19,7 +19,6 @@ class Index extends React.Component {
         dispatch(checkUser());
     }
     render() {
-        console.log("props = ", this.props)
         return (
             <React.Fragment>
                 <Header />
@@ -32,16 +31,3 @@ class Index extends React.Component {
         );
     }
 }
-
-function mapStateToProps({ user }) {
-    const currentUser = getCurrentUser(user);
-    const error = getError(user);
-    const isAuth = getIsAuth(user);
-    return {
-        currentUser,
-        error,
-        isAuth
-    };
-}
-
-export default connect(mapStateToProps)(Index);

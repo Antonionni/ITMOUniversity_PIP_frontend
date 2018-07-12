@@ -25,17 +25,7 @@ class SignIn extends React.Component {
             dispatch(signIn(data))
         };
     }
-    componentWillReceiveProps(newProp) {
-        debugger;
-        const { isAuth } = newProp.user;
-        debugger;
-         if (isAuth !== this.props.isAuth && !isAuth) {
-             // PNotify.alert('Неверный логин или пароль!');
-             console.log('Неверный логин или пароль!');
-         } else {
-             window.location.hash = "/dashboard";
-         }
-    }
+
     renderContent() {
         return (
             <React.Fragment>

@@ -2,7 +2,9 @@ export const URLS = {
     signUp: "/signup",
     signIn: "/login",
     logout: "/logout",
-    checkUser: "/profile/new"
+    checkUser: "/profile/new",
+    update: "/users/update",
+    changePassword: "/accounts/password/change"
 };
 
 export const PASSWORD_MESSAGES = {

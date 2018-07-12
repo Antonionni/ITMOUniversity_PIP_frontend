@@ -13,6 +13,9 @@ const USER_LOGOUT = "USER_LOGOUT";
 const USER_UPDATE = "USER_UPDATE"
 const USER_UPDATE_FAILED = "USER_UPDATE_FAILED";
 
+const USER_CHANGE_PASSWORD = "USER_CHANGE_PASSWORD";
+const USER_CHANGE_PASSWORD_FAILED = "USER_CHANGE_PASSWORD_FAILED";
+
 // actions
 export const userSignInSucceeded = createAction(USER_SIGN_IN_SUCCEEDED);
 export const userSignInFailed = createAction(USER_SIGN_IN_FAILED);
@@ -25,44 +28,49 @@ export const userLogout = createAction(USER_LOGOUT);
 export const userUpdate = createAction(USER_UPDATE);
 export const userUpdateFailed = createAction(USER_UPDATE_FAILED);
 
+export const userChangePassword = createAction(USER_CHANGE_PASSWORD);
+export const userChangePasswordFailed = createAction(USER_CHANGE_PASSWORD_FAILED);
+
 const initialState = {
     currentUser: null,
     error: null,
     isAuth: null
 };
 
-export const signIn = (data) => {
+
+
+export const signIn = (requestData) => {
     return (dispatch) => {
-        api.signIn(data).done((data, textStatus, response) => {
-            dispatch(userSignInSucceeded(data));
-        }).fail((data) => {
+        api.signIn(requestData).done(() => {
             debugger;
-            dispatch(userSignInFailed(data));
+            dispatch(userSignInSucceeded());
+            dispatch(push("/"));
+        }).fail(() => {
+            debugger;
+            dispatch(userSignInFailed());
         });
     };
 };
 
 export const checkUser = () => {
     return (dispatch) => {
-        api.checkUser().done((result) => {
-            dispatch(userChecked(result));
+        api.checkUser().done((responseData) => {
+            dispatch(userChecked(responseData.data));
             dispatch(push("/dashboard"));
-        }).fail((data) => {
-            debugger;
-            dispatch(userSignInFailed(data));
+        }).fail(() => {
+            dispatch(userSignInFailed());
         });
     }
 };
 
-export const signUp = (data) => {
+export const signUp = (requestData) => {
     return (dispatch) => {
-        api.signUp(data).done((state) => {
-            dispatch(userSignUp(state));
-            dispatch(push("/dashboard"));
+        api.signUp(requestData).done((responseData) => {
+            dispatch(userSignUp());
+            dispatch(push("/sign-in"));
         });
     };
 };
-
 
 export const logout = () => {
     return (dispatch) => {
@@ -72,33 +80,45 @@ export const logout = () => {
     };
 };
 
-export const updateUser = (data) => {
+export const updateUser = (requestData) => {
     return (dispatch) => {
-        api.updateUser(data).done((data) => {
-            dispatch(userUpdate(data));
+        api.updateUser(requestData).done((responseData) => {
+            if (responseData.data) {
+                dispatch(userUpdate(requestData));
+            }
         }).fail(() => {
             dispatch(userUpdateFailed());
         })
     };
-}
+};
+
+export const changePasswordUser = (requestData) => {
+    return (dispatch) => {
+        api.changePassword(requestData).done(() => {
+            dispatch(userChangePassword());
+        }).fail(() => {
+            dispatch(userChangePasswordFailed());
+        })
+    };
+};
 
 
 export default handleActions({
     [USER_SIGN_IN_SUCCEEDED]: (state, { payload }) => {
         return _.assign(state, {
-            currentUser: payload.data,
+            currentUser: payload,
             isAuth: true
         });
     },
     [USER_SIGN_IN_FAILED]: (state, { payload }) => {
         return _.assign(state, {
             isAuth: false,
-            error: payload
+            error: null
         });
     },
     [CHECK_USER]: (state, { payload }) => {
         return _.assign(state, {
-            currentUser: payload.data,
+            currentUser: payload,
             isAuth: true
         });
     },
@@ -114,7 +134,7 @@ export default handleActions({
     },
     [USER_UPDATE]: (state, { payload }) => {
         return _.assign(state, {
-            user: payload.data
+            currentUser: payload
         });
     },
     [USER_UPDATE_FAILED]: (state, { payload }) => {

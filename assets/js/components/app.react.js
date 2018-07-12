@@ -8,24 +8,40 @@ import MyCourses from './courses/my-courses.react';
 
 import {Route, Switch, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {getCurrentUser, getError, getIsAuth} from "../duck/user";
+import { getCurrentUser, getError, getIsAuth } from "../duck/user";
 
 
-export default class App extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentWillReceiveProps() {
+        console.log("newProps");
+    }
     render() {
-        console.log("render")
         return (
             <Switch>
-                <Route exact path='/' component={Index} />
-                <Route path='/register' render={props => <Register {...props} />} />
-                <Route path='/sign-in' render={SignIn} />
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path='/admin' render={AdminPanel} />
-                <Route path='/mycourses' render={MyCourses} />
+                <Route exact path='/' render={props => <Index {...props} {...this.props} /> }/>
+                <Route path='/register' render={props => <Register {...props} {...this.props} />} />
+                <Route path='/sign-in' render={props => <SignIn {...props} {...this.props} />} />
+                <Route path="/dashboard" render={props => <Dashboard {...props} {...this.props} />}/>
+                <Route path='/admin' render={props => <AdminPanel {...props} {...this.props} />} />
+                <Route path='/mycourses' render={props => <MyCourses {...props} {...this.props} />} />
             </Switch>
         );
     }
 }
+
+
+function mapStateToProps({ user }) {
+    const currentUser = getCurrentUser(user);
+    const error = getError(user);
+    const isAuth = getIsAuth(user);
+    return {
+        currentUser,
+        error,
+        isAuth
+    };
+}
+
+export default withRouter(connect(mapStateToProps)(App));

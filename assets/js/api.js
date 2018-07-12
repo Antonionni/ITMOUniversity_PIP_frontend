@@ -1,8 +1,7 @@
-import _ from 'underscore';
-
-import { URLS, SESSION_NAME } from "./constants";
+import { URLS  } from "./constants";
 
 export const signIn = (data) => {
+    debugger;
     return $.ajax({
         url: URLS.signIn,
         method: "POST",
@@ -14,7 +13,7 @@ export const signUp = (data) => {
     return $.ajax({
         url: URLS.signUp,
         method: "POST",
-        body: JSON.stringify(data)
+        data: data
     });
 };
 
@@ -32,10 +31,20 @@ export const checkUser = () => {
 };
 
 export const updateUser = (data) => {
+    debugger;
     return $.ajax({
         url: URLS.update,
         method: "POST",
         data: JSON.stringify(data),
         contentType: "application/json"
     });
-}
+};
+
+
+export const changePassword = (data) => {
+    return $.ajax({
+        url: URLS.changePassword,
+        method: "POST",
+        data: data
+    });
+};

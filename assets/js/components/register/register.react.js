@@ -18,71 +18,84 @@ export default class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: "",
-            secondname: "",
-            birthDate : "",
-            role: "",
-            email: "",
-            password1: "",
-            password2: ""
-        };
-
-        this.handleChangeInput = (e) => {
-            this.setState({
-               [e.target.name]: e.target.value
-            });
+            birthDate : 0,
+            roles: ""
         };
 
         this.handleChangeDate = (e) => {
+            const timestamp = new Date(e.value).getTime();
             this.setState({
-                birthDate: e.value
+                birthDate: timestamp
             });
         };
 
         this.handleChangeUserType = (e) => {
             this.setState({
-                role: e.value
+                roles: e.value
             });
         };
 
-        this.handleRegisterClick = (data) => {
-            const { firstname, secondname, birthDay, role, email, password1, password2 } = this.state;
-            debugger;
-            dispatch(signUp(this.state));
+        this.handleRegisterClick = (e) => {
+            const {  birthDate, roles  } = this.state;
+            const { dispatch } = this.props;
+
+            e.preventDefault();
+            const data = $(this.registerForm).serializeArray();
+
+            data.push({
+                name: "name",
+                value: "testName"
+            });
+            data.push({
+                name: "roles",
+                value: roles
+            });
+
+            data.push({
+                name: "birthDate",
+                value: `${birthDate / 1000}`
+            });
+            dispatch(signUp(data))
         };
     }
 
     render() {
-        const { role } = this.state;
+        const { roles, birthDate } = this.state;
         return (
             <React.Fragment>
                 <Header register />
                 <div className="main-content">
-                    <form className="register form" onSubmit={this.handleRegisterClick}>
+                    <form className="register form" ref={node => this.registerForm = node } onSubmit={this.handleRegisterClick}>
                         <h2>Регистрация</h2>
                         <div>
-                            <InputText name="email" placeholder="Email" onChange={this.handleChangeInput} />
+                            <InputText id="email" name="email" placeholder="Email" />
                         </div>
                         <div>
-                            <InputText name="firstname" placeholder="Имя" onChange={this.handleChangeInput} />
+                            <InputText id="firstName" name="firstName" placeholder="Имя" />
                         </div>
                         <div>
-                            <InputText name="secondname" placeholder="Фамилия" onChange={this.handleChangeInput} />
+                            <InputText id="lastName" name="lastName" placeholder="Фамилия" />
                         </div>
                         <div>
-                            <InputText name="placeOfStudy" placeholder="Образование" onChange={this.handleChangeInput} />
+                            <InputText id="placeOfStudy" name="placeOfStudy" placeholder="Образование" onChange={this.handleChangeInput} />
                         </div>
                         <div>
-                            <Calendar name="birthDate" placeholder="День рождения" onChange={this.handleChangeDate} />
+                            <Calendar
+                                id="birthDate"
+                                showIcon="true"
+                                name="birthDate"
+                                value={new Date(birthDate)}
+                                placeholder="День рождения"
+                                onChange={this.handleChangeDate} />
                         </div>
                         <div>
-                            <SelectButton name="roles" value={role} options={OPTIONS} onChange={this.handleChangeUserType}></SelectButton>
+                            <SelectButton id="roles" name="roles" value={roles} options={OPTIONS} onChange={this.handleChangeUserType}></SelectButton>
                         </div>
                         <div>
-                            <Password name="password1" placeholder="Пароль" feedback={false} onChange={this.handleChangeInput} />
+                            <Password id="password" name="password" placeholder="Пароль" feedback={false} />
                         </div>
                         <div>
-                            <Password name="password2" placeholder="Повторите пароль" feedback={false} onChange={this.handleChangeInput} />
+                            <Password id="repeatPassword" name="repeatPassword" placeholder="Повторите пароль" feedback={false} />
                         </div>
                         <div>
                             <Button label="Зарегистрироваться" />
