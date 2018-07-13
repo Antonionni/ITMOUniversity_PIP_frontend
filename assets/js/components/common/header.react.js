@@ -63,6 +63,10 @@ export default class Header extends Component {
                 command: () => { dispatch(push("/create-course")) }
             },
             {
+                label: "Панель администратора",
+                command: () => { dispatch(push("/admin")) }
+            },
+            {
                 label: "Выход",
                 command: () => { dispatch(logout()) }
             }

@@ -13,9 +13,10 @@ export default class AdminPanel extends React.Component {
     }
 
     render() {
+        const { currentUser } = this.props;
         return (
             <div className="admin-panel-wrapper">
-                <Header user={"admin"}/>
+                <Header user={currentUser ? currentUser.baseUser : null} {...this.props}/>
                 <TabView>
                     <TabPanel header="Запросы регистрации">
                         <AcceptTeacher />

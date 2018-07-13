@@ -59,7 +59,7 @@ export default class CreateCourse extends React.Component {
     }
     renderEmpty() {
         return (
-            <div className="empty">Выбирете элемент для редактрирования</div>
+            <div className="empty">Выберете элемент для редактирования</div>
         )
     }
     render() {
@@ -70,7 +70,7 @@ export default class CreateCourse extends React.Component {
                 <Header user={currentUser ? currentUser.baseUser : null} {...this.props}/>
                 <div className="create-course-wrapper base-wrapper">
                     <div className="create-course-content">
-                        <h2>Срздание курса</h2>
+                        <h2>Создание курса</h2>
                         <div className="left-side">
                             <Tree selectionMode="single" value={treeData} selection={currentItem} selectionChange={this.handleSelectItem}></Tree>
                         </div>

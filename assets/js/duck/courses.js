@@ -4,8 +4,6 @@ import { push } from "react-router-redux";
 
 
 //sign in
-
-
 const LOAD_COURSES = "LOAD_COURSES";
 const CREATE_COURSE = "CREATE_COURSE";
 const UPDATE_COURSE = "UPDATE_COURSE";
