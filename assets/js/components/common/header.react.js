@@ -4,11 +4,8 @@ import {Menu} from 'primereact/components/menu/Menu';
 
 import { Link } from 'react-router-dom';
 
-const items = [
-    { label: "Настройки" },
-    { label: "Мои курсы" },
-    { label: "Выход" },
-];
+import { logout } from '../../duck/user';
+import { push } from "react-router-redux";
 
 export default class Header extends Component {
     constructor(props) {
@@ -52,7 +49,24 @@ export default class Header extends Component {
         );
     }
     renderUser() {
-        const { user } = this.props;
+        const { user, dispatch  } = this.props;
+        const items = [
+            {
+                label: "Настройки",
+                command: () => { dispatch(push("/dashboard")) }
+            },
+            {
+                label: "Мои курсы"
+            },
+            {
+                label: "Создать курс",
+                command: () => { dispatch(push("/create-course")) }
+            },
+            {
+                label: "Выход",
+                command: () => { dispatch(logout()) }
+            }
+        ];
         return (
             <React.Fragment>
                 <Menu model={items} popup={true} ref={el=>this.menu=el} />

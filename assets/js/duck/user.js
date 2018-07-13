@@ -42,11 +42,9 @@ const initialState = {
 export const signIn = (requestData) => {
     return (dispatch) => {
         api.signIn(requestData).done(() => {
-            debugger;
             dispatch(userSignInSucceeded());
             dispatch(push("/"));
         }).fail(() => {
-            debugger;
             dispatch(userSignInFailed());
         });
     };
@@ -76,6 +74,7 @@ export const logout = () => {
     return (dispatch) => {
         api.logout().done((state) => {
             dispatch(userLogout(state));
+            dispatch(push("/"));
         });
     };
 };
@@ -101,6 +100,7 @@ export const changePasswordUser = (requestData) => {
         })
     };
 };
+
 
 
 export default handleActions({
@@ -129,7 +129,8 @@ export default handleActions({
     },
     [USER_LOGOUT]: (state, { payload }) => {
         return _.assign(state, {
-            error: payload
+            currentUser: null,
+            isAuth: false
         });
     },
     [USER_UPDATE]: (state, { payload }) => {

@@ -1,7 +1,7 @@
-import { URLS  } from "./constants";
+import { URLS } from "./constants";
 
+// user
 export const signIn = (data) => {
-    debugger;
     return $.ajax({
         url: URLS.signIn,
         method: "POST",
@@ -20,7 +20,7 @@ export const signUp = (data) => {
 export const logout = () => {
     return $.ajax({
         url: URLS.logout,
-        method: "POST",
+        method: "GET"
     });
 };
 
@@ -31,7 +31,6 @@ export const checkUser = () => {
 };
 
 export const updateUser = (data) => {
-    debugger;
     return $.ajax({
         url: URLS.update,
         method: "POST",
@@ -47,4 +46,63 @@ export const changePassword = (data) => {
         method: "POST",
         data: data
     });
+};
+
+// courses
+
+export const loadCourses = () => {
+    return $.ajax({
+        url: URLS.loadCourses,
+        method: "GET"
+    });
+};
+
+export const getCourse = (id) => {
+    return $.ajax({
+        url: `${URLS.getCourse}${id}`,
+        method: "GET"
+    })
+};
+
+export const createCourse = (data) => {
+    return $.ajax({
+        url: URLS.createCourse,
+        method: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json"
+    });
+};
+
+export const updateCourse = (data) => {
+    return $.ajax({
+        url: URLS.createCourse,
+        method: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json"
+    });
+};
+
+export const deleteCourse = (id) => {
+    return $.ajax({
+        url: `${URLS.deleteCourse}${id}`,
+        method: "POST"
+    });
+};
+
+export const createPeriod = (data, courseID) => {
+    return $.ajax({
+        url: `${URLS.createPeriod}${courseID}`,
+        method: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json"
+    })
+};
+
+export const updatePeriod = (data, courseID) => {
+    return $.ajax({
+        url: `${URLS.updatePeriod}${courseID}`,
+        method: "POST",
+        data: JSON.stringify(data),
+        contentType: "application/json"
+    })
 };

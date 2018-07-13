@@ -51,10 +51,10 @@ export default class Register extends React.Component {
                 value: roles
             });
 
-            data.push({
+            /*data.push({
                 name: "birthDate",
-                value: `${birthDate / 1000}`
-            });
+                value: `${birthDate}`
+            });*/
             dispatch(signUp(data))
         };
     }
